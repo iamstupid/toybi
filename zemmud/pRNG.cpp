@@ -34,8 +34,8 @@ namespace pRNG{
 		return pRNG_adapt(*(new T(vv...)));
 	}
 	template<typename T>
-	pRNG<typename T::result_type>pRNG_duplicate(T gg){
-		return pRNG_adapt(*(new T(gg)));
+	pRNG<typename T::result_type>pRNG_duplicate(pRNG<typename T::result_type>gg){
+		return pRNG_adapt(*(new T(gg.template instance<T>())));
 	}
 	template<typename T>
 	void pRNG_free(pRNG<typename T::result_type>gg){
