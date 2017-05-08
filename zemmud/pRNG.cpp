@@ -16,6 +16,8 @@ namespace pRNG{
 		void seed(vv...args){
 			((T*)data_region)->seed(args...);
 		}
+		template<typename T>
+		inline T&instance(){return *(T*)data_region;}
 	};
 	template<typename T>
 	typename T::result_type pRNG_next(
@@ -30,6 +32,10 @@ namespace pRNG{
 	template<typename T,typename...args>
 	pRNG<typename T::result_type>pRNG_create(args...vv){
 		return pRNG_adapt(*(new T(vv...)));
+	}
+	template<typename T>
+	pRNG<typename T::result_type>pRNG_duplicate(T gg){
+		return pRNG_adapt(*(new T(gg)));
 	}
 	template<typename T>
 	void pRNG_free(pRNG<typename T::result_type>gg){
