@@ -5,6 +5,7 @@
 namespace pRNG{
 	struct xs32{
 		typedef u32 result_type;
+		static const u32 rand_max=~u32(0);
 		u32 s;
 		xs32(u32 s=0x9b64d0b8u):s(s){}
 		inline u32 operator()(){
@@ -15,6 +16,7 @@ namespace pRNG{
 	};
 	struct xs128{
 		typedef u32 result_type;
+		static const u32 rand_max=~u32(0);
 		u32 s[4];
 		xs128():s{0xa6249560u,0x0c5fd38fu,0xc7661894u,0x22990a15}{}
 		template<typename T>
@@ -31,6 +33,7 @@ namespace pRNG{
 	};
 	struct xss64{
 		typedef u64 result_type;
+		static const u64 rand_max=~u64(0);
 		u64 s;
 		xss64(u64 s=0x9bf4bd1d835a38e6ull):s(s){}
 		inline void seed(u64 st){s=st;}
@@ -42,6 +45,7 @@ namespace pRNG{
 	};
 	struct xss1k{
 		typedef u64 result_type;
+		static const u64 rand_max=~u64(0);
 		u64 s[16],p;
 		xss1k():
 		s{	0x79a3d197a3eda564ull,0xea0832f5f13eca6eull,
@@ -66,6 +70,7 @@ namespace pRNG{
 	};
 	struct xsadw{
 		typedef u64 result_type;
+		static const u64 rand_max=~u64(0);
 		u64 s[2];
 		xsadw():s{0xc4f7ba40435d8ee7ull,0x54d21665a4290c80ull}{}
 		template<typename T>
