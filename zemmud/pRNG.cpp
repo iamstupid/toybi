@@ -12,6 +12,10 @@ namespace pRNG{
 		inline result_type operator()(){
 			return iterate_function(data_region);
 		}
+		template<typename T,typename...vv>
+		void seed(vv...args){
+			((T*)data_region)->seed(args...);
+		}
 	};
 	template<typename T>
 	typename T::result_type pRNG_next(
@@ -22,6 +26,14 @@ namespace pRNG{
 	template<class T>
 	pRNG<typename T::result_type>pRNG_adapt(T&prng_instance){
 		return pRNG<typename T::result_type>((void*)(&prng_instance),pRNG_next<T>);
+	}
+	template<typename T,typename...args>
+	pRNG<typename T::result_type>pRNG_create(args...vv){
+		return pRNG_adapt(*(new T(vv...)));
+	}
+	template<typename T>
+	void pRNG_free(pRNG<typename T::result_type>gg){
+		delete (T*)(gg.data_region);
 	}
 }
 #endif
