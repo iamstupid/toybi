@@ -23,9 +23,8 @@ u128 sqrt(u128 r){
 	u128 approx=u128(sqrt_approx(u64(r>>cnt)))<<(cnt/2);
 	approx=(approx+r/approx)>>1;
 	u128 apt=u128(u64(approx))*u128(u64(approx));
-	if(apt>r)return approx-1;
 //	if(r-apt>=2*approx-1)return approx+1;
-	return approx;
+	return approx-((r-apt)>>127);
 }
 u128 rand_arr[count],root_arr[count];
 
